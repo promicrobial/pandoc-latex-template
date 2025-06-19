@@ -978,9 +978,11 @@ $endif$
 \newcommand{\colorRule}[3][black]{\textcolor[HTML]{#1}{\rule{#2}{#3}}}
 \begin{flushleft}
 \noindent
-\\[-1em]
-\color[HTML]{$if(titlepage-text-color)$$titlepage-text-color$$else$5F5F5F$endif$}
+\\[1em]
+\color[HTML]{$if(titlepage-text-color)$$titlepage-text-color$$else$4d6167$endif$}
+$if(titlepage-rule)$
 \makebox[0pt][l]{\colorRule[$if(titlepage-rule-color)$$titlepage-rule-color$$else$435488$endif$]{1.3\textwidth}{$if(titlepage-rule-height)$$titlepage-rule-height$$else$4$endif$pt}}
+$endif$
 \par
 \noindent
 
