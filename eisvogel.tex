@@ -1020,6 +1020,29 @@ $else$
 }
 $endif$
 
+% start Modified NC 2025
+$if(license)$
+\vskip 1em
+\noindent {\normalsize \textsf{License: $license$}}
+$endif$
+
+$if(copyright)$
+\vskip 0.5em
+\noindent {\normalsize \textsf{$copyright$}}
+$endif$
+
+$if(version)$
+\vskip 0.5em
+\noindent {\normalsize \textsf{Version $version$}}
+$endif$
+
+$if(keywords)$
+\vskip 1em
+\noindent {\normalsize \textsf{Keywords: $for(keywords)$$keywords$$sep$, $endfor$}}
+$endif$
+
+%end
+
 $if(titlepage-logo)$
 \noindent
 \includegraphics[width=$if(logo-width)$$logo-width$$else$35mm$endif$, left]{$titlepage-logo$}
