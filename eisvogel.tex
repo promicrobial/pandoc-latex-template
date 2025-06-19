@@ -991,15 +991,19 @@ $if(titlepage-background)$
 {
   \setstretch{2}
   \vfill
-  \vskip -8em
+  \vskip -15em
   \noindent {\huge \textbf{\textsf{$title$}}}
   $if(subtitle)$
   \vskip 1em
   {\Large \textsf{$subtitle$}}
   $endif$
-  \vskip 2em
-  \noindent {\Large \textsf{$for(author)$$author$$sep$, $endfor$} \vskip 0.6em \textsf{$date$}}
+  \vskip -0.5em
+  \noindent {\Large \textsf{$for(author)$$author$$sep$, $endfor$}}
+  $if(titlepage-header)$
+  \vskip -0.5em
+  \noindent {\normalsize \texttt{$titlepage-header$}}
   \vfill
+  $endif$
 }
 $else$
 {
@@ -1010,7 +1014,7 @@ $else$
   \vskip 1em
   {\Large \textsf{$subtitle$}}
   $endif$
-  \vskip 2em
+  \vskip -0.5em
   \noindent {\Large \textsf{$for(author)$$author$$sep$, $endfor$}}
   \vfill
 }
