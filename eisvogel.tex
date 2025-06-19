@@ -44,13 +44,24 @@
 % Modified by Nathaniel L. Cole 2025 for personal use
 %%
 
-% Options for packages loaded elsewhere
+%%
+%% #start options Options for packages loaded elsewhere
+%%
+
 \PassOptionsToPackage{unicode$for(hyperrefoptions)$,$hyperrefoptions$$endfor$}{hyperref}
 \PassOptionsToPackage{hyphens}{url}
 \PassOptionsToPackage{dvipsnames,svgnames,x11names,table}{xcolor}
 $if(CJKmainfont)$
 \PassOptionsToPackage{space}{xeCJK}
 $endif$
+
+%% #end options
+
+
+%%
+%% #start documentclass
+%%
+
 \documentclass[
 $for(babel-otherlangs)$
   $babel-otherlangs$,
@@ -71,6 +82,13 @@ $for(classoption)$
 $endfor$
   ,captions=tableheading
 ]{$if(book)$scrbook$else$scrartcl$endif$}
+
+%% #end documentclass
+
+%%
+%% #start packages usepackage declarations
+%%
+
 $if(beamerarticle)$
 \usepackage{beamerarticle} % needs to be loaded first
 $endif$
@@ -225,7 +243,7 @@ $if(zero-width-non-joiner)$
   \catcode`^^^^200c=\active
   \protected\def ^^^^200c{\zerowidthnonjoiner}
 \fi
-%% End of ZWNJ support
+%% end of ZWNJ support
 $endif$
 % Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
@@ -322,7 +340,7 @@ $highlighting-macros$
 
 $endif$
 %
-% tables
+% #start tables table packages and options
 %
 $if(tables)$
 \usepackage{longtable,booktabs,array}
@@ -347,8 +365,11 @@ $else$
 \makesavenoteenv{longtable}
 $endif$
 $endif$
+
+% #end tables
+
 %
-% graphics
+% #start graphics
 %
 $if(graphics)$
 \usepackage{graphicx}
@@ -400,8 +421,11 @@ $if(CJKmainfont)$
 $endif$
 \fi
 $endif$
+
+% #end graphics
+
 %
-% CSL citations
+% #start citations CSL citation settings
 %
 $if(csl-refs)$
 % definitions for citeproc citations
@@ -438,8 +462,11 @@ $if(csl-refs)$
 \newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{\strut#1\strut}}
 \newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
 $endif$
+
+% #end citations
+
 %
-% Babel language support
+% #start babel Babel language support
 %
 $if(lang)$
 \ifLuaTeX
@@ -462,8 +489,11 @@ $endfor$
   \usepackage{selnolig} % disable illegal ligatures
 \fi
 $endif$
+
+% #end babel
+
 %
-% pagestyle
+%  #start pagestyle
 %
 $if(pagestyle)$
 \pagestyle{$pagestyle$}
@@ -477,12 +507,18 @@ $endif$
 %
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+% #end pagestyle  
+
 %
-% subfigure support
+% #start subfigure support
 %
 $if(subfigure)$
 \usepackage{subcaption}
 $endif$
+
+% #end subfigure
+
 %
 % text direction support for pdftex
 %
@@ -583,7 +619,7 @@ $if(page-background)$
 $endif$
 
 %
-% for the background color of the title page
+% #start background for the background color of the title page
 %
 $if(titlepage)$
 \usepackage{pagecolor}
@@ -959,7 +995,7 @@ $endif$
 \begin{document}
 
 %%
-%% begin titlepage
+%% #start titlepage
 %%
 $if(titlepage)$
 \begin{titlepage}
@@ -1020,7 +1056,10 @@ $else$
 }
 $endif$
 
-% start Modified NC 2025
+%%
+%% #start Modified NC 2025
+%%
+
 $if(license)$
 \vskip 1em
 \noindent {\normalsize \textsf{License: $license$}}
@@ -1041,7 +1080,9 @@ $if(keywords)$
 \noindent {\normalsize \textsf{Keywords: $for(keywords)$$keywords$$sep$, $endfor$}}
 $endif$
 
-%end
+%%
+%% #end
+%%
 
 $if(titlepage-logo)$
 \noindent
@@ -1057,6 +1098,29 @@ $endif$
 \restoregeometry
 \pagenumbering{arabic}
 $endif$
+$endif$
+
+%%
+%% #end titlepage
+%%
+
+%%
+%% #start acknowledgments
+%%
+
+$if(acknowledgments)$
+\newpage
+\thispagestyle{empty}
+\section*{Acknowledgments}
+\begingroup
+$acknowledgments$
+\endgroup
+\newpage
+$endif$
+
+%%
+%% #end acknowledgments
+%%
 
 $if(has-frontmatter)$
 \frontmatter
