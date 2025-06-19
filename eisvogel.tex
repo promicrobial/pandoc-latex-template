@@ -39,6 +39,11 @@
 % For usage information and examples visit the official GitHub page:
 % https://github.com/Wandmalfarbe/pandoc-latex-template
 %%
+
+%%
+% Modified by Nathaniel L. Cole 2025 for personal use
+%%
+
 % Options for packages loaded elsewhere
 \PassOptionsToPackage{unicode$for(hyperrefoptions)$,$hyperrefoptions$$endfor$}{hyperref}
 \PassOptionsToPackage{hyphens}{url}
@@ -95,9 +100,9 @@ $if(footnotes-disable-backlinks)$
 $else$
 \usepackage{footnotebackref}
 $endif$
-$--
-$-- section numbering
-$--
+%
+% section numbering
+%
 $if(numbersections)$
 \setcounter{secnumdepth}{$if(secnumdepth)$$secnumdepth$$else$5$endif$}
 $else$
@@ -118,15 +123,15 @@ $if(mathspec)$
 $else$
   \usepackage{unicode-math} % this also loads fontspec
 $endif$
-  \defaultfontfeatures{Scale=MatchLowercase}$-- must come before Beamer theme
+  \defaultfontfeatures{Scale=MatchLowercase}% must come before Beamer theme
   \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
 \fi
 $if(fontfamily)$
 $else$
-$-- Set default font before Beamer theme so the theme can override it
+% Set default font before Beamer theme so the theme can override it
 \usepackage{lmodern}
 $endif$
-$-- User font settings (must come after default font and Beamer theme)
+% User font settings (must come after default font and Beamer theme)
 $if(fontfamily)$
 \usepackage[$for(fontfamilyoptions)$$fontfamilyoptions$$sep$,$endfor$]{$fontfamily$}
 $endif$
@@ -237,9 +242,9 @@ $else$
 \usepackage{setspace}
 \setstretch{1.2}
 $endif$
-$--
-$-- paragraph formatting
-$--
+%
+% paragraph formatting
+%
 $if(indent)$
 $else$
 \makeatletter
@@ -281,13 +286,13 @@ $if(block-headings)$
 \makeatother
 $endif$
 $endif$
-$--
-$-- verbatim in notes
-$--
+%
+% verbatim in notes
+%
 $if(verbatim-in-note)$
 \usepackage{fancyvrb}
 $endif$
-$-- highlighting
+% highlighting
 $if(listings)$
 \usepackage{listings}
 \newcommand{\passthrough}[1]{#1}
@@ -316,9 +321,9 @@ $highlighting-macros$
 \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,fontsize=$if(code-block-font-size)$$code-block-font-size$$else$\small$endif$,commandchars=\\\{\}}
 
 $endif$
-$--
-$-- tables
-$--
+%
+% tables
+%
 $if(tables)$
 \usepackage{longtable,booktabs,array}
 $if(multirow)$
@@ -342,9 +347,9 @@ $else$
 \makesavenoteenv{longtable}
 $endif$
 $endif$
-$--
-$-- graphics
-$--
+%
+% graphics
+%
 $if(graphics)$
 \usepackage{graphicx}
 \makeatletter
@@ -368,9 +373,9 @@ $endif$
 $if(svg)$
 \usepackage{svg}
 $endif$
-$--
-$-- strikeout/underline
-$--
+%
+% strikeout/underline
+%
 $if(strikeout)$
 \ifLuaTeX
   \usepackage{luacolor}
@@ -395,9 +400,9 @@ $if(CJKmainfont)$
 $endif$
 \fi
 $endif$
-$--
-$-- CSL citations
-$--
+%
+% CSL citations
+%
 $if(csl-refs)$
 % definitions for citeproc citations
 \NewDocumentCommand\citeproctext{}{}
@@ -433,9 +438,9 @@ $if(csl-refs)$
 \newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{\strut#1\strut}}
 \newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
 $endif$
-$--
-$-- Babel language support
-$--
+%
+% Babel language support
+%
 $if(lang)$
 \ifLuaTeX
 \usepackage[bidi=basic,shorthands=off,$for(babeloptions)$,$babeloptions$$endfor$]{babel}
@@ -457,30 +462,30 @@ $endfor$
   \usepackage{selnolig} % disable illegal ligatures
 \fi
 $endif$
-$--
-$-- pagestyle
-$--
+%
+% pagestyle
+%
 $if(pagestyle)$
 \pagestyle{$pagestyle$}
 $endif$
-$--
-$-- prevent overfull lines
-$--
+%
+% prevent overfull lines
+%
 \setlength{\emergencystretch}{3em} % prevent overfull lines
-$--
-$-- tight lists
-$--
+%
+% tight lists
+%
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
-$--
-$-- subfigure support
-$--
+%
+% subfigure support
+%
 $if(subfigure)$
 \usepackage{subcaption}
 $endif$
-$--
-$-- text direction support for pdftex
-$--
+%
+% text direction support for pdftex
+%
 $if(dir)$
 \ifPDFTeX
   \TeXXeTstate=1
@@ -490,9 +495,9 @@ $if(dir)$
   \newenvironment{LTR}{\beginL}{\endL}
 \fi
 $endif$
-$--
-$-- bibliography support support for natbib and biblatex
-$--
+%
+% bibliography support support for natbib and biblatex
+%
 $if(natbib)$
 \usepackage[$natbiboptions$]{natbib}
 \bibliographystyle{$if(biblio-style)$$biblio-style$$else$plainnat$endif$}
@@ -503,9 +508,9 @@ $for(bibliography)$
 \addbibresource{$bibliography$}
 $endfor$
 $endif$
-$--
-$-- csquotes
-$--
+%
+% csquotes
+%
 $if(csquotes)$
 \usepackage[$for(csquotesoptions)$$csquotesoptions$$sep$,$endfor$]{csquotes}
 $endif$
