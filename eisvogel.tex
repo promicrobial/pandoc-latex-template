@@ -894,7 +894,7 @@ $else$
   \chead*{$if(header-center)$$header-center$$else$$title$$endif$}
   \ohead*{$if(header-right)$$header-right$$else$$date$$endif$}
   \ifoot*{$if(footer-left)$$footer-left$$else$$for(author)$$author$$sep$, $endfor$$endif$}
-  \cfoot*{$if(footer-center)$$footer-center$$else$$endif$}
+  \cfoot*{$if(footer-center)$$footer-center$$else$$for(email)$$email$$sep$, $endfor$$endif$}
   \ofoot*{$if(footer-right)$$footer-right$$else$\thepage$endif$}
   \addtokomafont{pageheadfoot}{\upshape}
 }
