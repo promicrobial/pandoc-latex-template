@@ -343,27 +343,29 @@ $endif$
 % #start tables table packages and options
 %
 $if(tables)$
-\usepackage{longtable,booktabs,array}
-$if(multirow)$
-\usepackage{multirow}
-$endif$
-\usepackage{calc} % for calculating minipage widths
-$if(beamer)$
-\usepackage{caption}
-% Make caption package work with longtable
-\makeatletter
-\def\fnum@table{\tablename~\thetable}
-\makeatother
-$else$
-% Correct order of tables after \paragraph or \subparagraph
-\usepackage{etoolbox}
-\makeatletter
-\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
-\makeatother
-% Allow footnotes in longtable head/foot
-\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
-\makesavenoteenv{longtable}
-$endif$
+  \usepackage{longtable,booktabs,array}
+
+  $if(multirow)$
+    \usepackage{multirow}
+  $endif$
+
+  \usepackage{calc} % for calculating minipage widths
+  $if(beamer)$
+    \usepackage{caption}
+    % Make caption package work with longtable
+    \makeatletter
+    \def\fnum@table{\tablename~\thetable}
+    \makeatother
+  $else$
+    % Correct order of tables after \paragraph or \subparagraph
+    \usepackage{etoolbox}
+    \makeatletter
+    \patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+    \makeatother
+    % Allow footnotes in longtable head/foot
+    \IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+    \makesavenoteenv{longtable}
+  $endif$
 $endif$
 
 % #end tables
@@ -372,54 +374,54 @@ $endif$
 % #start graphics
 %
 $if(graphics)$
-\usepackage{graphicx}
-\makeatletter
-\newsavebox\pandoc@box
-\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
-  \sbox\pandoc@box{#1}%
-  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
-  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
-  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
-  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
-  \else\usebox{\pandoc@box}%
-  \fi%
-}
-% Set default figure placement to htbp
-% Make use of float-package and set default placement for figures to H.
-% The option H means 'PUT IT HERE' (as  opposed to the standard h option which means 'You may put it here if you like').
-\usepackage{float}
-\floatplacement{figure}{$if(float-placement-figure)$$float-placement-figure$$else$H$endif$}
-\makeatother
-$endif$
-$if(svg)$
-\usepackage{svg}
-$endif$
-%
-% strikeout/underline
-%
-$if(strikeout)$
-\ifLuaTeX
-  \usepackage{luacolor}
-  \usepackage[soul]{lua-ul}
-\else
-  \usepackage{soul}
-$if(beamer)$
+  \usepackage{graphicx}
   \makeatletter
-  \let\HL\hl
-  \renewcommand\hl{% fix for beamer highlighting
-    \let\set@color\beamerorig@set@color
-    \let\reset@color\beamerorig@reset@color
-    \HL}
+  \newsavebox\pandoc@box
+  \newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+    \sbox\pandoc@box{#1}%
+    \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+    \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+    \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+    \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+    \else\usebox{\pandoc@box}%
+    \fi%
+  }
+  % Set default figure placement to htbp
+  % Make use of float-package and set default placement for figures to H.
+  % The option H means 'PUT IT HERE' (as  opposed to the standard h option which means 'You may put it here if you like').
+  \usepackage{float}
+  \floatplacement{figure}{$if(float-placement-figure)$$float-placement-figure$$else$H$endif$}
   \makeatother
-$endif$
-$if(CJKmainfont)$
-  \ifXeTeX
-    % soul's \st doesn't work for CJK:
-    \usepackage{xeCJKfntef}
-    \renewcommand{\st}[1]{\sout{#1}}
+  $endif$
+  $if(svg)$
+  \usepackage{svg}
+  $endif$
+  %
+  % strikeout/underline
+  %
+  $if(strikeout)$
+  \ifLuaTeX
+    \usepackage{luacolor}
+    \usepackage[soul]{lua-ul}
+  \else
+    \usepackage{soul}
+  $if(beamer)$
+    \makeatletter
+    \let\HL\hl
+    \renewcommand\hl{% fix for beamer highlighting
+      \let\set@color\beamerorig@set@color
+      \let\reset@color\beamerorig@reset@color
+      \HL}
+    \makeatother
+  $endif$
+  $if(CJKmainfont)$
+    \ifXeTeX
+      % soul's \st doesn't work for CJK:
+      \usepackage{xeCJKfntef}
+      \renewcommand{\st}[1]{\sout{#1}}
+    \fi
+  $endif$
   \fi
-$endif$
-\fi
 $endif$
 
 % #end graphics
@@ -1068,7 +1070,7 @@ $if(titlepage)$
       $endif$
 
       %%
-      %% #start Modified NC 2025
+      %% #start extras extra titlepage metadata
       %%
 
       $if(license)$
