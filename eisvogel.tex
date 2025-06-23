@@ -153,14 +153,13 @@ $endif$
   \usepackage{textcomp} % provide euro and other symbols
 \else % if luatex or xetex
   $if(mathspec)$
-  \ifXeTeX
-    \usepackage{mathspec} % this also loads fontspec
-  \else
-    \usepackage{unicode-math} % this also loads fontspec
-  \fi
-
+    \ifXeTeX
+      \usepackage{mathspec} % this also loads fontspec
+    \else
+      \usepackage{unicode-math} % this also loads fontspec
+    \fi
   $else$
-  \usepackage{unicode-math} % this also loads fontspec
+    \usepackage{unicode-math} % this also loads fontspec
   $endif$
 
   \defaultfontfeatures{Scale=MatchLowercase}% must come before Beamer theme
@@ -169,7 +168,7 @@ $endif$
 
 $if(fontfamily)$
 $else$
-% Set default font before Beamer theme so the theme can override it
+  % Set default font before Beamer theme so the theme can override it
   \usepackage{lmodern}
 $endif$
 
@@ -180,94 +179,92 @@ $endif$
 
 \ifPDFTeX\else
   % xetex/luatex font selection
-$if(mainfont)$
-	$if(mainfontfallback)$
-	  \ifLuaTeX
-    \usepackage{luaotfload}
-    \directlua{luaotfload.add_fallback("mainfontfallback",{
-      $for(mainfontfallback)$"$mainfontfallback$"$sep$,$endfor$
-    })}
-  \fi
+  $if(mainfont)$
+    $if(mainfontfallback)$
+      \ifLuaTeX
+        \usepackage{luaotfload}
+        \directlua{luaotfload.add_fallback("mainfontfallback",{
+          $for(mainfontfallback)$"$mainfontfallback$"$sep$,$endfor$
+        })}
+      \fi
 
-$endif$
-  \setmainfont[$for(mainfontoptions)$ $mainfontoptions$ $sep$,$endfor$ $if(mainfontfallback)$,RawFeature={fallback=mainfontfallback}$endif$]{$mainfont$}
-$endif$
-
-$if(sansfont)$
-	$if(sansfontfallback)$
-	  \ifLuaTeX
-    \usepackage{luaotfload}
-    \directlua{luaotfload.add_fallback("sansfontfallback",{
-      $for(sansfontfallback)$"$sansfontfallback$"$sep$,$endfor$
-    })}
-  \fi
-
-$endif$
-  \setsansfont[$for(sansfontoptions)$ $sansfontoptions$ $sep$,$endfor$ $if(sansfontfallback)$,RawFeature={fallback=sansfontfallback}$endif$]{$sansfont$}
-$endif$
-
-$if(monofont)$
-	$if(monofontfallback)$
-	  \ifLuaTeX
-    \usepackage{luaotfload}
-    \directlua{luaotfload.add_fallback("monofontfallback",{
-      $for(monofontfallback)$"$monofontfallback$"$sep$,$endfor$
-    })}
-  \fi
-
-$endif$
-  \setmonofont[$for(monofontoptions)$ $monofontoptions$ $sep$,$endfor$ $if(monofontfallback)$,RawFeature={fallback=monofontfallback}$endif$]{$monofont$}
-$endif$
-
-$for(fontfamilies)$
-  \newfontfamily{$fontfamilies.name$}[$for(fontfamilies.options)$ $fontfamilies.options$ $sep$,$endfor$]{$fontfamilies.font$}
-$endfor$
-
-$if(mathfont)$
-	$if(mathspec)$
-	  \ifXeTeX
-    \setmathfont(Digits,Latin,Greek)[$for(mathfontoptions)$ $mathfontoptions$ $sep$,$endfor$]{$mathfont$}
-  \else
-    \setmathfont[$for(mathfontoptions)$ $mathfontoptions$ $sep$,$endfor$]{$mathfont$}
-  \fi
-
-$else$
-  \setmathfont[$for(mathfontoptions)$ $mathfontoptions$ $sep$,$endfor$]{$mathfont$}
-$endif$
-
-$endif$
-
-$if(CJKmainfont)$
-  \ifXeTeX
-  \usepackage{xeCJK}
-  \setCJKmainfont[$for(CJKoptions)$ $CJKoptions$ $sep$,$endfor$]{$CJKmainfont$}
- 
-  $if(CJKsansfont)$
-    \setCJKsansfont[$for(CJKoptions)$ $CJKoptions$ $sep$,$endfor$]{$CJKsansfont$}
+    $endif$
+    \setmainfont[$for(mainfontoptions)$ $mainfontoptions$ $sep$,$endfor$ $if(mainfontfallback)$,RawFeature={fallback=mainfontfallback}$endif$]{$mainfont$}
   $endif$
 
-  $if(CJKmonofont)$
-    \setCJKmonofont[$for(CJKoptions)$ $CJKoptions$ $sep$,$endfor$]{$CJKmonofont$}
+  $if(sansfont)$
+    $if(sansfontfallback)$
+      \ifLuaTeX
+        \usepackage{luaotfload}
+        \directlua{luaotfload.add_fallback("sansfontfallback",{
+          $for(sansfontfallback)$"$sansfontfallback$"$sep$,$endfor$
+        })}
+      \fi
+
+    $endif$
+    \setsansfont[$for(sansfontoptions)$ $sansfontoptions$ $sep$,$endfor$ $if(sansfontfallback)$,RawFeature={fallback=sansfontfallback}$endif$]{$sansfont$}
   $endif$
 
-  \fi
+  $if(monofont)$
+    $if(monofontfallback)$
+      \ifLuaTeX 
+        \usepackage{luaotfload}
+        \directlua{luaotfload.add_fallback("monofontfallback",{
+          $for(monofontfallback)$"$monofontfallback$"$sep$,$endfor$
+        })}
+      \fi
 
-$endif$
+    $endif$
+    \setmonofont[$for(monofontoptions)$ $monofontoptions$ $sep$,$endfor$ $if(monofontfallback)$,RawFeature={fallback=monofontfallback}$endif$]{$monofont$}
+  $endif$
 
-$if(luatexjapresetoptions)$
-  \ifLuaTeX
-  \usepackage[$for(luatexjapresetoptions)$ $luatexjapresetoptions$ $sep$,$endfor$]{luatexja-preset}
-  \fi
+  $for(fontfamilies)$
+    \newfontfamily{$fontfamilies.name$}[$for(fontfamilies.options)$ $fontfamilies.options$ $sep$,$endfor$]{$fontfamilies.font$}
+  $endfor$
 
-$endif$
+  $if(mathfont)$
+    $if(mathspec)$
+      \ifXeTeX
+        \setmathfont(Digits,Latin,Greek)[$for(mathfontoptions)$ $mathfontoptions$ $sep$,$endfor$]{$mathfont$}
+      \else
+        \setmathfont[$for(mathfontoptions)$ $mathfontoptions$ $sep$,$endfor$]{$mathfont$}
+      \fi
+    $else$
+      \setmathfont[$for(mathfontoptions)$ $mathfontoptions$ $sep$,$endfor$]{$mathfont$}
+    $endif$
+  $endif$
 
-$if(CJKmainfont)$
-  \ifLuaTeX
-  \usepackage[$for(luatexjafontspecoptions)$ $luatexjafontspecoptions$ $sep$,$endfor$]{luatexja-fontspec}
-  \setmainjfont[$for(CJKoptions)$ $CJKoptions$ $sep$,$endfor$]{$CJKmainfont$}
-  \fi
+  $if(CJKmainfont)$
+    \ifXeTeX
+      \usepackage{xeCJK}
+      \setCJKmainfont[$for(CJKoptions)$ $CJKoptions$ $sep$,$endfor$]{$CJKmainfont$}
+  
+      $if(CJKsansfont)$
+        \setCJKsansfont[$for(CJKoptions)$ $CJKoptions$ $sep$,$endfor$]{$CJKsansfont$}
+      $endif$
 
-$endif$
+      $if(CJKmonofont)$
+        \setCJKmonofont[$for(CJKoptions)$ $CJKoptions$ $sep$,$endfor$]{$CJKmonofont$}
+      $endif$
+
+    \fi
+
+  $endif$
+
+  $if(luatexjapresetoptions)$
+    \ifLuaTeX
+      \usepackage[$for(luatexjapresetoptions)$ $luatexjapresetoptions$ $sep$,$endfor$]{luatexja-preset}
+    \fi
+
+  $endif$
+
+  $if(CJKmainfont)$
+    \ifLuaTeX
+      \usepackage[$for(luatexjafontspecoptions)$ $luatexjafontspecoptions$ $sep$,$endfor$]{luatexja-fontspec}
+      \setmainjfont[$for(CJKoptions)$ $CJKoptions$ $sep$,$endfor$]{$CJKmainfont$}
+    \fi
+
+  $endif$
 
 \fi
 
@@ -275,28 +272,29 @@ $endif$
 
 $if(zero-width-non-joiner)$
 	%% Support for zero-width non-joiner characters.
-\makeatletter
-\def\zerowidthnonjoiner{%
-  % Prevent ligatures and adjust kerning, but still support hyphenating.
-  \texorpdfstring{%
-    \TextOrMath{\nobreak\discretionary{-}{}{\kern.03em}%
-      \ifvmode\else\nobreak\hskip\z@skip\fi}{}%
-  }{}%
-}
-\makeatother
+  \makeatletter
+  \def\zerowidthnonjoiner{%
+    % Prevent ligatures and adjust kerning, but still support hyphenating.
+    \texorpdfstring{%
+      \TextOrMath{\nobreak\discretionary{-}{}{\kern.03em}%
+        \ifvmode\else\nobreak\hskip\z@skip\fi}{}%
+    }{}%
+  }
+  \makeatother
 
-\ifPDFTeX
-  \DeclareUnicodeCharacter{200C}{\zerowidthnonjoiner}
-\else
-  \catcode`^^^^200c=\active
-  \protected\def ^^^^200c{\zerowidthnonjoiner}
-\fi
+  \ifPDFTeX
+    \DeclareUnicodeCharacter{200C}{\zerowidthnonjoiner}
+  \else
+    \catcode`^^^^200c=\active
+    \protected\def ^^^^200c{\zerowidthnonjoiner}
+  \fi
 
-%% end of ZWNJ support
+  %% end of ZWNJ support
 $endif$
 
 % Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+
 \IfFileExists{microtype.sty}{% use microtype if available
   \usepackage[$for(microtypeoptions)$ $microtypeoptions$ $sep$,$endfor$]{microtype}
   \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
@@ -364,6 +362,8 @@ $else$
   $endif$
 
 $endif$
+
+% #end paragraphs
 
 %
 % #start verbatim handling of verbatim text environments
@@ -478,8 +478,8 @@ $endif$
 %
 $if(strikeout)$
 	\ifLuaTeX
-  \usepackage{luacolor}
-  \usepackage[soul]{lua-ul}
+    \usepackage{luacolor}
+    \usepackage[soul]{lua-ul}
   \else
     \usepackage{soul}
     $if(beamer)$
@@ -493,7 +493,7 @@ $if(strikeout)$
     $endif$
 
     $if(CJKmainfont)$
-        \ifXeTeX
+      \ifXeTeX
         % soul's \st doesn't work for CJK:
         \usepackage{xeCJKfntef}
         \renewcommand{\st}[1]{\sout{#1}}
@@ -1285,109 +1285,109 @@ $endif$
 %
 
 $if(acknowledgments)$
-\newpage
-\thispagestyle{empty}
-\section*{Acknowledgments}
-\begingroup
-$acknowledgments$
-\endgroup
-\newpage
+  \newpage
+  \thispagestyle{empty}
+  \section*{Acknowledgments}
+  \begingroup
+    $acknowledgments$
+  \endgroup
+  \newpage
 $endif$
 
 % #end acknowledgments
 
 $if(has-frontmatter)$
-\frontmatter
+  \frontmatter
 $endif$
 
 $if(title)$
-% don't generate the default title
-% \maketitle
-$if(abstract)$
-\begin{abstract}
-  $abstract$
-\end{abstract}
-$endif$
+  % don't generate the default title
+  % \maketitle
+  $if(abstract)$
+    \begin{abstract}
+      $abstract$
+    \end{abstract}
+  $endif$
 $endif$
 
 $if(first-chapter)$
-\setcounter{chapter}{$first-chapter$}
-\addtocounter{chapter}{-1}
+  \setcounter{chapter}{$first-chapter$}
+  \addtocounter{chapter}{-1}
 $endif$
 
 $for(include-before)$
-$include-before$
+  $include-before$
 $endfor$
 
 $if(toc)$
-$if(toc-title)$
-\renewcommand*\contentsname{$toc-title$}
-$endif$
+  $if(toc-title)$
+    \renewcommand*\contentsname{$toc-title$}
+  $endif$
 
-{
+  {
     $if(colorlinks)$
-    \hypersetup{linkcolor=$if(toccolor)$ $toccolor$ $else$ $endif$}
+      \hypersetup{linkcolor=$if(toccolor)$ $toccolor$ $else$ $endif$}
     $endif$
 
     \setcounter{tocdepth}{$toc-depth$}
     \tableofcontents
     $if(toc-own-page)$
-    \newpage
+      \newpage
     $endif$
 
   }
 $endif$
 
 $if(lof)$
-\listoffigures
+  \listoffigures
 $endif$
 
 $if(lot)$
-\listoftables
+  \listoftables
 $endif$
 
 $if(linestretch)$
-\setstretch{$linestretch$}
+  \setstretch{$linestretch$}
 $endif$
 
 $if(has-frontmatter)$
-\mainmatter
+  \mainmatter
 $endif$
 
 $body$
 
 $if(has-frontmatter)$
-\backmatter
+  \backmatter
 $endif$
 
 $if(nocite-ids)$
-\nocite{$for(nocite-ids)$ $it$ $sep$, $endfor$}
+  \nocite{$for(nocite-ids)$ $it$ $sep$, $endfor$}
 $endif$
 
 %
 % #start references
 %
 $if(natbib)$
-$if(bibliography)$
-$if(biblio-title)$
-$if(has-chapters)$
-\renewcommand\bibname{$biblio-title$}
-$else$
-\renewcommand\refname{$biblio-title$}
-$endif$
-$endif$
-\bibliography{$for(bibliography)$ $bibliography$ $sep$,$endfor$}
-$endif$
+  $if(bibliography)$
+    $if(biblio-title)$
+      $if(has-chapters)$
+        \renewcommand\bibname{$biblio-title$}
+      $else$
+        \renewcommand\refname{$biblio-title$}
+      $endif$
+    $endif$
+    \bibliography{$for(bibliography)$ $bibliography$ $sep$,$endfor$}
+  $endif$
 $endif$
 
 $if(biblatex)$
-\printbibliography$if(biblio-title)$[title=$biblio-title$]$endif$
+  \printbibliography$if(biblio-title)$[title=$biblio-title$]$endif$
 $endif$
 
 % #end references
 
 $for(include-after)$
-$include-after$
+  $include-after$
 $endfor$
 
 \end{document}
